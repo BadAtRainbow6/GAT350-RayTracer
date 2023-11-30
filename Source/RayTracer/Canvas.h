@@ -12,15 +12,15 @@ public:
     void Update();
 
     void Clear(const color4_t& color);
-    void DrawPoint(const glm::vec2& point, const color4_t& color);
+    void DrawPoint(const glm::ivec2& point, const color4_t& color);
 
     const glm::vec2& GetSize() const { return m_size; }
 
-    friend Renderer;
+    friend class Renderer;
 
 private:
     struct SDL_Texture* m_texture = nullptr;
     std::vector<rgba_t> m_buffer;
 
-    glm::vec2 m_size{ 0 };
+    glm::ivec2 m_size{ 0 };
 };
