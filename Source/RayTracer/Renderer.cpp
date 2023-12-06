@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Canvas.h"
+#include <iostream>
 
 bool Renderer::Initialize() {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -18,7 +19,7 @@ void Renderer::Shutdown() {
 }
 
 bool Renderer::CreateWindow(const std::string& title, int width, int height) {
-    m_window = SDL_CreateWindow(title.c_str(), 100, 100, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL);
+    m_window = SDL_CreateWindow(title.c_str(), 100, 100, width, height, SDL_WINDOW_SHOWN);
     if (!m_window) {
         std::cerr << "SDL Error: " << SDL_GetError() << std::endl;
         SDL_Quit();

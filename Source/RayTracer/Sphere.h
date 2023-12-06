@@ -8,7 +8,7 @@ public:
 	Sphere(const glm::vec3& center, float radius, std::shared_ptr<Material> material) :
 		Object(material),
 		m_center{ center },
-		m_radius{ radius }
+		m_radius(radius)
 	{
 	}
 

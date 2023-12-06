@@ -1,19 +1,22 @@
 #pragma once
-#include <iostream>
-#include "SDL.h"
+#include <SDL.h>
+#include <string>
 
-class Renderer {
+class Renderer
+{
 public:
-    Renderer() = default;
+	Renderer() = default;
 
-    bool Initialize();
-    void Shutdown();
-    bool CreateWindow(const std::string& title, int width, int height);
+	bool Initialize();
+	void Shutdown();
+	bool CreateWindow(const std::string& title, int width, int height);
+	void PresentCanvas(const class Canvas& canvas);
 
-    void PresentCanvas(const class Canvas& canvas);
+	friend class Canvas;
 
-    friend class Canvas;
 private:
-    SDL_Window* m_window = nullptr;
-    SDL_Renderer* m_renderer = nullptr;
+	//<pointer to SDL_Window, set default value to nullptr>
+	SDL_Window* m_window = nullptr;
+	//<pointer to SDL_Renderer, set default value to nullptr>
+	SDL_Renderer* m_renderer = nullptr;
 };
