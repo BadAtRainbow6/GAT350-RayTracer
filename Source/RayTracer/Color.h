@@ -1,23 +1,29 @@
 #pragma once
 #include <glm/glm.hpp>
+
 using color3_t = glm::vec3;
 using color4_t = glm::vec4;
 using rgba_t = uint32_t;
-class Color {
 
-public:
-    inline color4_t RGBAToColor(const rgba_t& rgba) {
-        return color4_t(
-            ((rgba >> 24) & 0xFF) / 255.0f,
-            ((rgba >> 16) & 0xFF) / 255.0f,
-            ((rgba >> 8) & 0xFF) / 255.0f,
-            (rgba & 0xFF) / 255.0f
-        );
-    }
-    inline rgba_t ColorToRGBA(const color4_t& color) {
-        return ((uint32_t)(color.a * 255.0f) << 24) |
-            ((uint32_t)(color.r * 255.0f) << 16) |
-            ((uint32_t)(color.g * 255.0f) << 8) |
-            ((uint32_t)(color.b * 255.0f));
-    }
-};
+inline color4_t RGBAToColor(const rgba_t& rgba)
+{
+    color4_t color;
+
+    color.r = ((rgba >> 24) & 0xff) / 2.550f;
+    color.g = ((rgba >> 16) & 0xff) / 2.550f;
+    color.b = ((rgba >> 8) & 0xff) / 2.550f;
+    color.a = ((rgba >> 0) & 0xff) / 2.550f;
+
+    return color;
+}
+
+inline rgba_t ColorToRGBA(const color4_t& color) {
+    rgba_t rgba = 0;
+
+    rgba |= uint8_t(glm::clamp(color.r, 0.0f, 1.0f) * 255) << 24;
+    rgba |= uint8_t(glm::clamp(color.g, 0.0f, 1.0f) * 255) << 16;
+    rgba |= uint8_t(glm::clamp(color.b, 0.0f, 1.0f) * 255) << 8;
+    rgba |= uint8_t(glm::clamp(color.a, 0.0f, 1.0f) * 255);
+
+    return rgba;
+}
